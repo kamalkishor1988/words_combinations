@@ -6,11 +6,11 @@ describe WordsCobinations do
   let(:output) { [%w[BEG,LOST,ZUZ], %w[CEIL,OPT,ZUZ  CEIL,ORT,ZUZ]] }
 
   context 'Tests conversion of number into word/combinations of words ' do
-    it 'returns true if number valid' do
+    it 'returns true if number is valid' do
       expect(WordsCobinations.new(number).valid_number?).to be(true)
     end
 
-    it 'returns false if number valid' do
+    it 'returns false if number is invalid' do
       expect(WordsCobinations.new(number1).valid_number?).to be(false)
     end
 
