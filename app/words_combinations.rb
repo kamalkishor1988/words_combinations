@@ -1,4 +1,3 @@
-require 'active_support/core_ext'
 # To convert phone number to words or combinations of words
 class WordsCobinations
   attr_reader :number, :letters, :words
@@ -11,9 +10,8 @@ class WordsCobinations
   end
 
   def valid_number?
-    return false if number.blank? ||
-                    number.length != 10 ||
-                    number.chars.to_set.intersect?(%w[0 1].to_set)
+    return false if number.length != 10 ||
+                    number.chars.map { |digit| (digit == '1' || digit == '0') }.include?(true)
     true
   end
 
