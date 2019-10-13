@@ -80,4 +80,3 @@ class WordsCobinations
     words.uniq
   end
 end
-# p WordsCobinations.new('2282668687').generate_all_possible_combinations
