@@ -1,11 +1,12 @@
 # To convert phone number to words or combinations of words
 class WordsCobinations
-  attr_reader :number, :words
+  attr_reader :number, :words, :min_word_length
   LETTERS = { '2' => %w[A B C], '3' => %w[D E F], '4' => %w[G H I],
               '5' => %w[J K L], '6' => %w[M N O], '7' => %w[P Q R S],
               '8' => %w[T U V], '9' => %w[W X Y Z] }.freeze
-  def initialize(number)
+  def initialize(number, min_word_length)
     @number = number
+    @min_word_length = min_word_length
     @words = []
   end
 
@@ -37,9 +38,9 @@ class WordsCobinations
     matching_words.any?(&:empty?) ? return : form_combination(matching_words)
   end
 
-  def perform_possible_combination(length)
-    index = 3
-    while index < (length - 2)
+  def generate_combination(length)
+    index = min_word_length
+    while index < (length - (min_word_length - 1))
       first_set  = @number_keys[0...index]
       second_set = @number_keys[index...length]
       extract_matching_words(first_set, second_set)
@@ -47,16 +48,15 @@ class WordsCobinations
     end
   end
 
-  def extract_number_keys
+  def extract_words_array
     @number_keys = number.chars.map { |number| LETTERS[number] }
-    perform_possible_combination(number.length)
+    generate_combination(number.length)
   end
 
   def generate_two_sets_combinations
     return unless valid_number?
     extract_dic_words
-    extract_number_keys
-    generate_three_sets_combinations
+    extract_words_array
   end
 
   def generate_one_set_combination
@@ -70,11 +70,12 @@ class WordsCobinations
                              @number_keys[combination[1]],
                              @number_keys[combination[2]])
     end
-    generate_one_set_combination
   end
 
   def generate_all_possible_combinations
     generate_two_sets_combinations
+    generate_three_sets_combinations if min_word_length == 3
+    generate_one_set_combination
     words.uniq
   end
 end
