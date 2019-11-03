@@ -1,11 +1,11 @@
 # To convert phone number to words or combinations of words
 class WordsCobinations
-  attr_reader :number, :letters, :words
+  attr_reader :number, :words
+  LETTERS = { '2' => %w[A B C], '3' => %w[D E F], '4' => %w[G H I],
+              '5' => %w[J K L], '6' => %w[M N O], '7' => %w[P Q R S],
+              '8' => %w[T U V], '9' => %w[W X Y Z] }.freeze
   def initialize(number)
     @number = number
-    @letters = { '2' => %w[A B C], '3' => %w[D E F], '4' => %w[G H I],
-                 '5' => %w[J K L], '6' => %w[M N O], '7' => %w[P Q R S],
-                 '8' => %w[T U V], '9' => %w[W X Y Z] }
     @words = []
   end
 
@@ -48,7 +48,7 @@ class WordsCobinations
   end
 
   def extract_number_keys
-    @number_keys = number.chars.map { |number| letters[number] }
+    @number_keys = number.chars.map { |number| LETTERS[number] }
     perform_possible_combination(number.length)
   end
 
