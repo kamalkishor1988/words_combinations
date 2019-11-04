@@ -18,25 +18,25 @@ describe WordsCobinations do
      "CATAMOUNTS"] }
   context 'Tests conversion of number into word/combinations of words ' do
     it 'returns true if number is valid' do
-      expect(WordsCobinations.new(number).valid_number?).to be(true)
+      expect(WordsCobinations.new(number, 3).valid_number?).to be(true)
     end
 
     it 'Tests output of conversion with multiple words or combination of words' do
-      expect(WordsCobinations.new(number).generate_all_possible_combinations).to match_array(output)
+      expect(WordsCobinations.new(number, 3).generate_all_possible_combinations).to match_array(output)
     end
 
     it 'returns true if number is valid' do
-      expect(WordsCobinations.new(number1).valid_number?).to be(true)
+      expect(WordsCobinations.new(number1, 3).valid_number?).to be(true)
     end
 
     it 'Tests output of conversion with multiple words or combination of words' do
-      expect(WordsCobinations.new(number1).generate_all_possible_combinations).to match_array(output1)
+      expect(WordsCobinations.new(number1, 3).generate_all_possible_combinations).to match_array(output1)
     end
   end
 
   context 'Checks phone number validity ' do
     it 'returns false if number is invalid' do
-      expect(WordsCobinations.new(number2).valid_number?).to be(false)
+      expect(WordsCobinations.new(number2, 3).valid_number?).to be(false)
     end
   end
 end
